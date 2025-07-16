@@ -1,0 +1,21 @@
+<h2>Gráfico de sensores</h2>
+
+<h2>Seleccionar sensores</h2>
+<select multiple (change)="onSeleccionCambio($event)">
+  <option *ngFor="let sensor of todosLosSensores" [value]="sensor.id" [selected]="sensoresSeleccionados().includes(sensor.id)">
+    {{ sensor.nombre }}
+  </option>
+</select>
+
+<hr />
+ 
+<!-- Visualizacion de graficos con chart.js-->
+
+<div *ngFor="let sensorId of sensoresSeleccionados()">
+  <h3>{{ obtenerNombreSensor(sensorId) }}</h3>
+  <canvas baseChart
+    [data]="chartDataPorSensor(sensorId)"
+    [options]="chartOptions"
+    chartType="line">
+  </canvas>
+</div>
